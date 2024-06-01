@@ -4,6 +4,7 @@ export interface CreateOrderDto {
     fertilizerId:string,
     paymentStatus: "paid" | "not paid",
     orderStatus:"pending" | "approved" | "rejected"
+   
 }
 
 export interface OrderDto {
@@ -29,6 +30,7 @@ export interface OrderDto {
          acre, 3kg per 1 acre, ...)  
         */
   };
+  amount:number;
 }
 
 /**

@@ -6,4 +6,9 @@ export default class FertilizerService {
     public static async create(fertilizer: FertilizerDto): Promise<any> {
       return await Fertilizer.create(fertilizer);
     }
+
+    public static async getByName(name: string): Promise<FertilizerDto> {
+     return await Fertilizer.findOne({name}) as unknown as FertilizerDto
+    }
+  
 }

@@ -27,6 +27,11 @@ const OrderSchema: Schema = new Schema(
       enum: ["partially paid", "fully paid","not paid"],
       default: "not paid",
     },
+    payableAmount: {
+      type: Number,
+      required: true,
+      default: 0,
+    }
   },
   { timestamps: true }
 );

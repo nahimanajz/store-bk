@@ -19,7 +19,5 @@ export default class FarmerController {
   public static async getById(id: string): Promise<FarmerDto> {
     return await FarmerService.getById(id);
   }
-  // public static async deleteFarmer(id: string): Promise<string> {
-  //  // return await FarmerService.deleteFarmer(id);
-  // }
+ 
 }
