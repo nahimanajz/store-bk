@@ -1,0 +1,12 @@
+node_modules
+.env
+package-lock.json
+/dist
+dist
+yarn.lock
+/coverage
+coverage
+/src/__test__/
+src/swagger.json
+.github
+sample.code.txt
