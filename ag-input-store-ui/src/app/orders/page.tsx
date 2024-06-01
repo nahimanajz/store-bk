@@ -15,9 +15,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Farmer } from "../types/Former";
 
-interface OrderProps {}
 
-const Order: FC<OrderProps> = () => {
+const Order = () => {
   const [order, setOrderData] = useState<IOrder | any>({});
   const [farmers, setFarmers] = useState<Farmer[]>();
 

@@ -16,7 +16,7 @@ const Table: FC<TableProps> = ({ data }) => {
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [query, setQuery] = useState(localStorage.getItem("farmerId"));
+  const [query, setQuery] = useState("");
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
