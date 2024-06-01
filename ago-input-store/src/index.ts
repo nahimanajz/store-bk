@@ -1,14 +1,14 @@
 
-import DBconnection from './configs/Database';
 import { PORT } from './configs';
 import express, { Application, NextFunction, Request, Response } from 'express';
- import farmerRoutes from "./routes/farmer"
- import orderRoutes from "./routes/order"
+import farmerRoutes from "./routes/farmer"
+import orderRoutes from "./routes/order"
 import cors from "cors";
-
+import env from 'dotenv'
+import DBconnection from './configs/Database';
 
 export const app = express();
-
+ env.config()
 DBconnection();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

@@ -19,7 +19,6 @@ route.post("/orders", async (req: Request, res: Response) => {
 route.get("/orders/:id", async (req: Request, res: Response) => {
     try {
       const data = await OrderController.getFarmerOrders(req);
-  
       return res
         .status(200)
         .json({ data});
