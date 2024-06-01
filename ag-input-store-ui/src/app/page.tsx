@@ -36,6 +36,7 @@ export default function Home() {
     .post(`${baseApiUrl}/farmers`, data)
     .then((response) => {
       console.log(response.data.message)
+      toast.success(response.data.message)
      setResponse({...response, title:response.data.data._id, subtitle:response.data.message, show:true})
     })
     .catch((error) => {
