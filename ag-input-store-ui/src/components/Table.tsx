@@ -17,7 +17,7 @@ const Table = () => {
 
   const fetchOrders = async () => {
     const { data } = await axios.get(
-      `${baseApiUrl}/orders/665af07ca7742ff72e13e468?page=1&limit=5`
+      `${baseApiUrl}/orders/farmer/665af07ca7742ff72e13e468?page=1&limit=5`
     );
 
     setOrders(data.data);
