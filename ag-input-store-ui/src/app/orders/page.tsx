@@ -15,6 +15,8 @@ interface OrderProps {}
 
 const Order: FC<OrderProps> = () => {
   const [order, setOrderData] = useState<IOrder | any>({});
+  const [showTable, setShowTable] = useState<boolean>(true)
+  
   const [seedsData, setSeedsData] = useState<ISeeds | any>({});
   const [fertilizerData, setFertilizerData] = useState<IFertilizer | any>({});
   const [land, setLand] = useState<ILand | any>({});
@@ -46,18 +48,14 @@ const Order: FC<OrderProps> = () => {
       fertilizer: fertilizerData,
       land,
     };
-    console.log(data);
     postRequest("orders", data);
   };
-  if (1 === 1) {
-    return (
-      <TopNav>
-        <Table />
-      </TopNav>
-    );
-  }
+ 
   return (
     <TopNav>
+      { showTable ?
+      <Table />: 
+
       <Form title="Order Info">
         <form className="h-full mb-[20px] grid md:grid-cols-2 grid-col-1 gap-5">
           <EditText
@@ -120,6 +118,7 @@ const Order: FC<OrderProps> = () => {
           className="bg-primary hover:border-[0.2px] hover:border-primary hover:bg-white text-white hover:text-primary w-full mt-8"
         />
       </Form>
+      }
     </TopNav>
   );
 };
