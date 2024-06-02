@@ -14,7 +14,7 @@ const EditText: FC<Props> = ({type, label, name, placeholder, onChange})=> {
   return (
     <div className="w-full">
     <label className="block font-medium text-black dark:text-white">
-      {label} test
+      {label} 
     </label>
 
     <input

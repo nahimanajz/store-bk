@@ -7,15 +7,22 @@ import Button from "../components/Button";
 import Form from "../components/Form";
 import { Farmer } from "./types/Former";
 import { baseApiUrl } from "../util";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { postRequest } from "@/services/global";
 import TopNav from "@/components/Nav";
 import { useRouter } from "next/navigation";
+import Alert from "@/components/Alert";
+import axios from "axios";
 
 export default function Home() {
   const [data, setData] = useState<Farmer | any>({});
-  const navigate = useRouter()
+  const [response, setResponse] = useState({
+    title:'',
+    subtitle:'',
+    show:false
+  })
+  const navigate = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -24,15 +31,24 @@ export default function Home() {
     });
   };
   const handleSubmit = () => {
-    postRequest("farmers", data, "farmer");
-    navigate.push("/orders")
-  
+   
+    axios
+    .post(`${baseApiUrl}/farmers`, data)
+    .then((response) => {
+      console.log(response.data.message)
+     setResponse({...response, title:response.data.data._id, subtitle:response.data.message, show:true})
+    })
+    .catch((error) => {
+
+     toast.error(error.response.data.error)
+    });
   };
 
   return (
     <>
-      <TopNav >
+      <TopNav>
         <Form title="Farmer Info">
+          <Alert title={response.title} subtitle={response.subtitle} show={response.show}/>
           <form action="" className="space-y-[20px]">
             <EditText
               type={"text"}
@@ -45,7 +61,7 @@ export default function Home() {
               type={"text"}
               label={"Email"}
               name={"email"}
-              placeholder={"Names"}
+              placeholder={"Email"}
               onChange={handleChange}
             />
             <Button
