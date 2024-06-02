@@ -22,7 +22,7 @@ const Button: FC<ButtonProps> = ({
     <button
         type={type}
         onClick={onClick}
-        className={`${baseClasses} ${className} border border-transparent`}>
+        className={`${baseClasses} ${className} border border-transparent text-white`}>
     
       {label}
       </button>

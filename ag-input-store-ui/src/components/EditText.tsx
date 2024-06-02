@@ -23,7 +23,7 @@ const EditText: FC<Props> = ({type, label, name, placeholder, onChange})=> {
       placeholder={`Enter ${placeholder}`}
       className={className}
       onChange={onChange}
-      required
+      required={true}
     />
   </div>
   );

@@ -21,6 +21,8 @@ const Order: FC<OrderProps> = () => {
   const [fertilizerData, setFertilizerData] = useState<IFertilizer | any>({});
   const [land, setLand] = useState<ILand | any>({});
 
+  const toggleShowTable =() => setShowTable(!showTable)
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setOrderData({
       ...order,
@@ -52,12 +54,12 @@ const Order: FC<OrderProps> = () => {
   };
  
   return (
-    <TopNav>
+    <TopNav toggleShowTable={toggleShowTable}>
       { showTable ?
       <Table />: 
 
       <Form title="Order Info">
-        <form className="h-full mb-[20px] grid md:grid-cols-2 grid-col-1 gap-5">
+        <form className="h-full mb-[20px] grid md:grid-cols-2 grid-col-1 gap-5" onSubmit={handleSubmit}>
           <EditText
             type={"text"}
             label={"Farmer Id"}
@@ -113,7 +115,7 @@ const Order: FC<OrderProps> = () => {
           />
         </form>
         <Button
-          onClick={handleSubmit}
+          type={"submit"}
           label={"Place Order"}
           className="bg-primary hover:border-[0.2px] hover:border-primary hover:bg-white text-white hover:text-primary w-full mt-8"
         />
