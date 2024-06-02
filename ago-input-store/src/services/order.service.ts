@@ -4,8 +4,12 @@ import { Order } from "../models/Order";
 import paginate from "../utils/pagination";
 
 export default class OrderService {
-  public static async create(order: CreateOrderDto): Promise<any> {
-    return await Order.create(order);
+  public static async update(id: string, orderStatus: string): Promise<OrderDto> {
+   return await Order.updateOne({_id: id}, {orderStatus: orderStatus as string}) as unknown as OrderDto; 
+  }
+
+  public static async create(order: CreateOrderDto): Promise<OrderDto> {
+    return await Order.create(order) as unknown as OrderDto;
   }
 
   public static async getFarmerOrders(req: Request): Promise<OrderDto[]> {
