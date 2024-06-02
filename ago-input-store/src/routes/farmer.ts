@@ -9,7 +9,7 @@ route.post("/farmers", async (req: Request, res: Response) => {
     const data = await farmerController.create(req.body);
 
     return res
-      .status(200)
+      .status(201)
       .json({ data, message: "Record created successfully" });
   } catch (error:any) {
     return res.status(500).json({ error: error?.message});
