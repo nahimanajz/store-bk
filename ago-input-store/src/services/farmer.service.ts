@@ -17,6 +17,7 @@ export default class FarmerService {
 
   
   public static async getByEmail(email: string): Promise<FarmerDto | any> {
+   
     return await Farmer.findOne({ email });
   }
 }

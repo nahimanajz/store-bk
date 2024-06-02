@@ -12,8 +12,8 @@ export default class OrderService {
     return await Order.create(order) as unknown as OrderDto;
   }
 
-  public static async getFarmerOrders(req: Request): Promise<OrderDto[]> {
-    const farmerId = req.params.id;
+  public static async getFarmerOrders(req: Request, farmerId:string): Promise<OrderDto[]> {
+  
     const { offset, limit } = paginate(req);
     return (await Order.find({ farmerId })
       .populate("fertilizerId")

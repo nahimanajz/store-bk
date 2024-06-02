@@ -9,17 +9,21 @@ import FertilizerService from "../services/fertilizer.service";
 import { Request } from "express";
 import { FertilizerDto } from "../dto/Fertilizer.dto";
 import { SeedDto } from "../dto/Seed.dto";
+import mongoose from "mongoose";
 
 export default class OrderController {
-  public static async update(id: string, orderStatus:string):Promise<OrderDto> {
-    return await OrderService.update(id, orderStatus) 
+  public static async update(
+    id: string,
+    orderStatus: string
+  ): Promise<OrderDto> {
+    return await OrderService.update(id, orderStatus);
   }
   public static async create(payload: OrderDto): Promise<OrderDto | any> {
     const hasFarmer = await FarmerService.getById(payload.farmerId);
     if (!hasFarmer) {
       throw new Error(`Farmer with id ${payload.farmerId} is not found`);
     }
-    
+
     this.calculateSeedQuantity(payload);
     this.calculateFertilizerQuantity(payload);
     this.hasSpecificSeed(payload.fertilizer);
@@ -40,12 +44,21 @@ export default class OrderController {
       paymentStatus: "not paid",
       orderStatus: "pending",
     };
-   
+
     return await OrderService.create(order);
   }
 
   public static async getFarmerOrders(req: Request): Promise<OrderDto[] | any> {
-    return await OrderService.getFarmerOrders(req);
+    const farmer = await FarmerService.getByEmail(req.params.query);
+    const isValid = mongoose.Types.ObjectId.isValid(req.params.query) 
+    if (farmer) {
+      return await OrderService.getFarmerOrders(req, farmer._id);
+    } else if (isValid) {
+
+      return await OrderService.getFarmerOrders(req, req.params.query);
+    } else {
+      throw new Error("Invalid Entry ")
+    }
   }
 
   /**
@@ -91,8 +104,7 @@ export default class OrderController {
    * @param payload
    * @description verify whehter fertilizer & seeds exist
    */
-  private static validatePayload(fertilizer: FertilizerDto, seeds:SeedDto) {
-    
+  private static validatePayload(fertilizer: FertilizerDto, seeds: SeedDto) {
     if (!fertilizer) {
       throw new Error(`Please fill Firtilizer fields`);
     }
