@@ -27,5 +27,15 @@ route.get("/orders/:id", async (req: Request, res: Response) => {
       return res.status(500).json({ error: error?.message});
     }
   });
+route.put("/orders/:id", async (req: Request, res: Response) => {
+    try {
+      const data = await OrderController.update(req.params.id, req.body.orderStatus);
+      return res
+        .status(200)
+        .json({ data, message:"Order status changed successfully." });
+    } catch (error:any) {
+      return res.status(500).json({ error: error?.message});
+    }
+});
 
 export default route;

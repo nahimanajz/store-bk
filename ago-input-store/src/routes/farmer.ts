@@ -5,6 +5,7 @@ const route = express.Router();
 
 route.post("/farmers", async (req: Request, res: Response) => {
   try {
+    
     const data = await farmerController.create(req.body);
 
     return res
